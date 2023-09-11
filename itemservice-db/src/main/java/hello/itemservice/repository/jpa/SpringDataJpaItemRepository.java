@@ -20,5 +20,4 @@ public interface SpringDataJpaItemRepository extends JpaRepository<Item,Long> {
 	@Query("select i from Item i where i.itemName like :itemName and i.price <= :price")
 	List<Item> findItems(@Param("itemName") String itemName, @Param("price") Integer price);
 
-
 }
