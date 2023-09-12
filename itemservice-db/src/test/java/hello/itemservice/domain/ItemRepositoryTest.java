@@ -101,6 +101,7 @@ class ItemRepositoryTest {
 
 	void test(String itemName, Integer maxPrice, Item... items) {
 		List<Item> result = itemRepository.findAll(new ItemSearchCond(itemName, maxPrice));
+		System.out.println("result = " + result);
 		assertThat(result).containsExactly(items);
 	}
 }
