@@ -20,7 +20,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 // @Import(MyBatisConfig.class)
 // @Import(JpaConfig.class)
 // @Import(SpringDataJpaConfig.class)
-@Import(QuerydslConfig.class)
+// @Import(QuerydslConfig.class)
+@Import(V2Config.class)
 @Slf4j
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web")
 public class ItemServiceApplication {
