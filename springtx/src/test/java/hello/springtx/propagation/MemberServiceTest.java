@@ -65,11 +65,44 @@ class MemberServiceTest {
 	@Test
 	void singleTx() {
 		//given
-		String username = "outerTxOff_success";
+		String username = "singleTx";
 		//when
 		memberService.joinV1(username);
 		//then
 		assertTrue(memberRepository.find(username).isPresent());
 		assertTrue(logRepository.find(username).isPresent());
+	}
+
+	/**
+	 * memberService : @Transactional on
+	 * memberRepository : @Transactional on
+	 * logRepository : @Transactional on
+	 */
+	@Test
+	void outerTxOn_success() {
+		//given
+		String username = "outerTxOn_success";
+		//when
+		memberService.joinV1(username);
+		//then
+		assertTrue(memberRepository.find(username).isPresent());
+		assertTrue(logRepository.find(username).isPresent());
+	}
+
+	/**
+	 * memberService : @Transactional off
+	 * memberRepository : @Transactional on
+	 * logRepository : @Transactional on Exception
+	 */
+	@Test
+	void outerTxOn_fail() {
+		//given
+		String username = "로그예외_outerTxOn_fail";
+		//when
+		assertThatThrownBy(() -> memberService.joinV1((username))).isInstanceOf(
+			RuntimeException.class);
+		//then
+		assertTrue(memberRepository.find(username).isEmpty());
+		assertTrue(logRepository.find(username).isEmpty());
 	}
 }
